@@ -1,22 +1,25 @@
 {
-  "name": "mytinerary-back-alexmendoza",
-  "version": "0.0.0",
-  "private": true,
-  "type": "module",
+  "name": "mytinerary_back-alexmendoza",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "node ./bin/www.js",
-    "dev": "nodemon ./bin/www.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./src/app.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexMG13/mytinerary_back-alexMendoza.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexMG13/mytinerary_back-alexMendoza/issues"
+  },
+  "homepage": "https://github.com/AlexMG13/mytinerary_back-alexMendoza#readme",
   "dependencies": {
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "dotenv": "^16.3.1",
-    "ejs": "~2.6.1",
-    "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "morgan": "~1.9.1"
-  },
-  "devDependencies": {
+    "express": "^4.18.2",
     "nodemon": "^3.0.1"
   }
 }
