@@ -20,6 +20,7 @@
   "homepage": "https://github.com/AlexMG13/mytinerary_back-alexMendoza#readme",
   "dependencies": {
     "express": "^4.18.2",
+    "mongoose": "^7.4.3",
     "nodemon": "^3.0.1"
   }
 }
