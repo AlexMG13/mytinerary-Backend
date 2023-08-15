@@ -1,14 +1,16 @@
 const express = require("express");
-const { getCities,postCity } = require('../controllers/cityController')
+const { getCities,addCity,deleteCity,getCity,updateCity } = require('../controllers/cityController');
+const { verifyCity,verifyId } = require("../middlewares/verifications");
  
 const router = express.Router();
 
-router.post("/newcity",postCity);
 router.get("/cities",getCities);
-
-/* router.get("/:id",getCity);
+router.post("/newcity",verifyCity,addCity);
+router.delete("/:id",verifyId,deleteCity);
+router.get("/:id",verifyId,getCity);
+router.patch("/:id",verifyId,updateCity);
+ /*
 router.put("/cities",putCity);
-router.delete("/:id",deleteCity);
-router.patch("/:id",editCity); */
+ */
 
 module.exports = router;
