@@ -5,7 +5,7 @@ const getCities = async (req, res) => {
     const cities = await City.find();
     res.status(201).json(cities);
   } catch (err) {
-    res.jason({ message: err.message });
+    res.jason({ message: "The cities could not been found" });
   }
 };
 
@@ -17,7 +17,7 @@ const addCity = async (req, res) => {
       message: "City created successfully",
     });
   } catch (err) {
-    res.status(500).json({ message: err });
+    res.status(500).json({ message: "The city could not been added" });
   }
 };
 
@@ -28,7 +28,7 @@ const deleteCity = async (req, res) => {
     res.status(201).json({ 
       message: "City deleted successfully"})
   } catch (err) {
-    res.status(500).json({ message: err });
+    res.status(500).json({ message: "The city could not been deleted" });
   }
 };
 
@@ -38,19 +38,20 @@ const getCity = async (req, res) => {
     const cityFound = await City.findById(id)
     res.status(201).json(cityFound)
     } catch (err) {
-        res.status(500).json({ message: err });
+        res.status(500).json({ message: "The city could not been found" });
       }
 }
 
 const updateCity = async (req, res) => {
   try {
-    let { id, newName } = req.params
-    await City.findByIdAndUpdate(id, {name: newName})
+    let { id } = req.params
+    const updateCity = await City.findByIdAndUpdate(id, {$set: req.body})
     res.status(201).json({
-      mensagge: "City updated successfully"
+      mensagge: "City updated successfully",
+      updateCity
     })
   } catch (err) {
-    res.status(500).json({ message: err });
+    res.status(500).json({ message: "The city could not been updated" });
   }
 }
 

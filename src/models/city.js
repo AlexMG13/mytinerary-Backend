@@ -12,6 +12,10 @@ const schemaCity = new Schema({
     photo : {
         type: 'string',
         required: true
+    },
+    description : {
+        type: 'string',
+        default : 'Beautiful City'
     }
 })
 
