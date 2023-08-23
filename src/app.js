@@ -5,9 +5,9 @@ require('./config/db')
 
 const app  = express()
 const PORT = process.env.PORT || 3030
+app.use(cors())
 app.use(express.json())
 app.use('/api',router)
-app.unsubscribe(cors())
 app.listen(PORT, () => {console.log(`listening on port ${PORT}`)})
 
 
