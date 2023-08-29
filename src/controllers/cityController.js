@@ -1,11 +1,11 @@
-const City = require("../models/city");
+const City = require("../models/City");
 
 const getCities = async (req, res) => {
   try {
-    const cities = await City.find();
+    const cities = await City.find().populate("itinerary");
     res.status(201).json(cities);
   } catch (err) {
-    res.jason({ message: "The cities could not been found" });
+    res.json({ message: "The cities could not been found" });
   }
 };
 
@@ -23,10 +23,11 @@ const addCity = async (req, res) => {
 
 const deleteCity = async (req, res) => {
   try {
-    let { id } = req.params
-    await City.deleteOne({ _id: id})
-    res.status(201).json({ 
-      message: "City deleted successfully"})
+    let { id } = req.params;
+    await City.deleteOne({ _id: id });
+    res.status(201).json({
+      message: "City deleted successfully",
+    });
   } catch (err) {
     res.status(500).json({ message: "The city could not been deleted" });
   }
@@ -34,25 +35,25 @@ const deleteCity = async (req, res) => {
 
 const getCity = async (req, res) => {
   try {
-    let { id } = req.params
-    const cityFound = await City.findById(id)
-    res.status(201).json(cityFound)
-    } catch (err) {
-        res.status(500).json({ message: "The city could not been found" });
-      }
-}
+    let { id } = req.params;
+    const cityFound = await City.findById(id);
+    res.status(201).json(cityFound);
+  } catch (err) {
+    res.status(500).json({ message: "The city could not been found" });
+  }
+};
 
 const updateCity = async (req, res) => {
   try {
-    let { id } = req.params
-    const updateCity = await City.findByIdAndUpdate(id, {$set: req.body})
+    let { id } = req.params;
+    const updateCity = await City.findByIdAndUpdate(id, { $set: req.body });
     res.status(201).json({
       mensagge: "City updated successfully",
-      updateCity
-    })
+      updateCity,
+    });
   } catch (err) {
     res.status(500).json({ message: "The city could not been updated" });
   }
-}
+};
 
-module.exports = { getCities, addCity, deleteCity, getCity ,updateCity};
+module.exports = { getCities, addCity, deleteCity, getCity, updateCity };

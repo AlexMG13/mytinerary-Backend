@@ -1,4 +1,4 @@
-const { Schema, model} = require('mongoose')
+const { Schema, model,Types} = require('mongoose')
 
 const schemaCity = new Schema({
     country : {
@@ -16,7 +16,11 @@ const schemaCity = new Schema({
     description : {
         type: 'string',
         default : 'Beautiful City'
-    }
+    },
+    activities: [{
+        type: Types.ObjectId,
+        ref: 'Itinerary'
+    }]
 })
 
 const City = model('City', schemaCity);
