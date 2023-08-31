@@ -17,7 +17,7 @@ const schemaCity = new Schema({
         type: 'string',
         default : 'Beautiful City'
     },
-    activities: [{
+    itineraries: [{
         type: Types.ObjectId,
         ref: 'Itinerary'
     }]

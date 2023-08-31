@@ -17,7 +17,10 @@ const addItinerary = async (req, res) => {
 const getItineraries = async (req, res) => {
   try {
     const itineraries = await Itinerary.find();
-    res.status(201).json(itineraries);
+    res.status(201).json({
+      message: "Itineraries found",
+      Itineraries: itineraries,
+    });
   } catch (err) {
     res.status(500).json({
       message: "The cities could not been found",
@@ -31,7 +34,7 @@ const updateItinerary = async (req, res) => {
       $set: req.body,
     });
     res.status(201).json({
-      mensagge: "City updated successfully",
+      mensagge: "Itinerary updated successfully",
       updatedItinerary,
     });
   } catch (err) {
@@ -53,10 +56,25 @@ const deleteItinerary = async (req, res) => {
     });
   }
 };
+const getItinerary = async (req, res) => {
+  try {
+    let { id } = req.params;
+    const itineraryFound = await Itinerary.findById(id);
+    res.status(201).json({
+      message: "Itinerary found",
+      Itinerary: itineraryFound,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Itinerary could not been found",
+    });
+  }
+};
 
 module.exports = {
   addItinerary,
   deleteItinerary,
   updateItinerary,
   getItineraries,
+  getItinerary,
 };

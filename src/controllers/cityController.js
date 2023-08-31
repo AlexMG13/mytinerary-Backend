@@ -2,13 +2,12 @@ const City = require("../models/City");
 
 const getCities = async (req, res) => {
   try {
-    const cities = await City.find().populate("itinerary");
+    const cities = await City.find();
     res.status(201).json(cities);
   } catch (err) {
     res.json({ message: "The cities could not been found" });
   }
 };
-
 const addCity = async (req, res) => {
   try {
     const city = await City.create(req.body);
@@ -20,7 +19,6 @@ const addCity = async (req, res) => {
     res.status(500).json({ message: "The city could not been added" });
   }
 };
-
 const deleteCity = async (req, res) => {
   try {
     let { id } = req.params;
@@ -32,7 +30,6 @@ const deleteCity = async (req, res) => {
     res.status(500).json({ message: "The city could not been deleted" });
   }
 };
-
 const getCity = async (req, res) => {
   try {
     let { id } = req.params;
@@ -42,7 +39,6 @@ const getCity = async (req, res) => {
     res.status(500).json({ message: "The city could not been found" });
   }
 };
-
 const updateCity = async (req, res) => {
   try {
     let { id } = req.params;
@@ -55,5 +51,26 @@ const updateCity = async (req, res) => {
     res.status(500).json({ message: "The city could not been updated" });
   }
 };
-
-module.exports = { getCities, addCity, deleteCity, getCity, updateCity };
+const searchCity = async (req, res) => {
+  try {
+    let queries = {};
+    if (req.query.name) {
+      queries.name = new RegExp('^'+ req.query.name, 'i');
+    }
+    const cities = await City.find(queries);
+    res.status(201).json({
+      message: "Cities found",
+      cities: cities
+    });
+  } catch (err) {
+    res.json({ message: "The cities could not been found"})
+  }
+};
+module.exports = {
+  getCities,
+  addCity,
+  deleteCity,
+  getCity,
+  updateCity,
+  searchCity,
+};

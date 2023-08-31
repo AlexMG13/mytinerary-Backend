@@ -1,6 +1,10 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, Types } = require("mongoose");
 
 const schemaItinerary = new Schema({
+  name: {
+    type: "string",
+    required: true,
+  },
   person: {
     type: "string",
     required: true,
@@ -11,19 +15,26 @@ const schemaItinerary = new Schema({
   },
   price: {
     type: Number,
-    default: 0,
     required: true,
   },
   duration: {
     type: Number,
-    default: 0,
     required: true,
   },
   likes: {
-    type: Number,
-    default: 0,
+    type: Array,
   },
-  hashtags: [],
+  hashtags: {
+    type: Array
+  },
+  comentaries: {
+    type: Array
+  },
+  _city: {
+    type: Types.ObjectId,
+    ref: 'City',
+    required: true
+  }
 });
 
 const Itinerary = model("Itinerary", schemaItinerary);
