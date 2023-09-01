@@ -2,7 +2,9 @@ const City = require("../models/City");
 
 const getCities = async (req, res) => {
   try {
-    const cities = await City.find();
+    const cities = await City.find().populate({
+      path: 'itineraries',
+    select: 'name price duration -_id'});
     res.status(201).json(cities);
   } catch (err) {
     res.json({ message: "The cities could not been found" });
@@ -33,7 +35,9 @@ const deleteCity = async (req, res) => {
 const getCity = async (req, res) => {
   try {
     let { id } = req.params;
-    const cityFound = await City.findById(id);
+    const cityFound = await City.findById(id).populate({
+      path: 'itineraries',
+    select: 'name price duration -_id'});
     res.status(201).json(cityFound);
   } catch (err) {
     res.status(500).json({ message: "The city could not been found" });

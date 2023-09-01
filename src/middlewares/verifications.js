@@ -53,22 +53,17 @@ const verifyItinerary = (req, res, next) => {
       message: "Invalid photo",
     });
   }
-  if (price == typeof float) {
+  if (price == typeof(int)) {
     return res.status(400).json({
       message: "Invalid type of price",
     });
   }
-  if (duration == typeof float) {
+  if (duration == typeof(int)) {
     return res.status(400).json({
       message: "Invalid type of duration",
     });
   }
-  if (likes == typeof int) {
-    return res.status(400).json({
-      message: "Invalid type of likes",
-    });
-  }
-  if (hashtags.lenght() >= 3) {
+  if (hashtags.lenght >= 2) {
     return res.status(400).json({
       message: "Invalid amount of hashtags",
     });

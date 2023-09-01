@@ -1,16 +1,19 @@
+const City = require("../models/City");
 const Itinerary = require("../models/Itinerary");
 
 const addItinerary = async (req, res) => {
   try {
-    const newItinerary = await Itinerary.create(req.body);
-    newItinerary.save();
-    res.status(201).json({
+    const newItinerary = {...req.body}
+    const { _city: cityId } = req.body
+      const itinerary = await Itinerary.create(newItinerary)
+      await City.findByIdAndUpdate(cityId,{ $push: { itineraries: itinerary._id }})
+      res.status(201).json({
       message: "New Itinerary added",
       Itinerary: newItinerary,
     });
   } catch (err) {
     res.status(500).json({
-      message: "Itinerary could not been created",
+      message: "Itinerary could not been created"
     });
   }
 };
