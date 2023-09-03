@@ -37,7 +37,7 @@ const getCity = async (req, res) => {
     let { id } = req.params;
     const cityFound = await City.findById(id).populate({
       path: 'itineraries',
-    select: 'name price duration photo -_id'});
+    select: 'name price duration photo hashtags -_id'});
     res.status(201).json(cityFound);
   } catch (err) {
     res.status(500).json({ message: "The city could not been found" });
