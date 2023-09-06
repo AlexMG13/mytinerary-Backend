@@ -19,6 +19,7 @@ const {
   verifyId,
   verifyItinerary,
 } = require("../middlewares/verifications");
+const authRouter = require('./auth')
 
 const router = express.Router();
 //Cities routers
@@ -35,5 +36,8 @@ router.post("/newitinerary", verifyItinerary, addItinerary);
 router.delete("/itinerary/:id", verifyId, deleteItinerary);
 router.get("/itinerary/:id", verifyId, getItinerary);
 router.patch("/itinerary/:id", verifyId, updateItinerary);
+
+//Router Auth
+router.use('/user',authRouter)
 
 module.exports = router;
