@@ -91,7 +91,7 @@ const userSchema = Joi.object({
     "string.empty": "Please enter your lastname!",
     "any.required": "Please enter your lastname!",
   }),
-  email: Joi.string().alphanum().min(4).max(20).required().messages({
+  email: Joi.string().email().min(4).max(50).required().messages({
     "string.email": "Please enter your email!",
     "string.min": "email is too short",
     "string.max": "email is too long",
@@ -105,7 +105,7 @@ const userSchema = Joi.object({
     "string.empty": "Please enter your password!",
     "any.required": "Please enter your password!",
   }),
-  photo: Joi.string().min(2).max(20).required().messages({
+  photo: Joi.string().required().messages({
     "string.photo": "Please enter your photo!",
     "string.min": "photo is too short",
     "string.max": "photo is too long",

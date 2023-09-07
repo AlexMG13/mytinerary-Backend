@@ -2,13 +2,14 @@ const bcript = require('bcrypt')
 
 const hashPassword = (req,res,next) => {
   try {
-    const passwordPlain = res.body.password
+    const passwordPlain = req.body.password
     const hashPassword = bcript.hashSync(passwordPlain,10)
     req.body.password = hashPassword
     next()
   } catch (error) {
     res.status(500).json({
-      message: "Error in Hash Password"
+      message: "Error in Hash Password",
+      pass: res.body.password
     })
   }
 }
