@@ -121,7 +121,7 @@ const userSchema = Joi.object({
   }),
 });
 const loginSchema = Joi.object({
-  email: Joi.string().alphanum().min(4).max(20).required().messages({
+  email: Joi.string().email().min(4).max(50).required().messages({
     "string.email": "Please enter your email!",
     "string.min": "email is too short",
     "string.max": "email is too long",
