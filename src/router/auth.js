@@ -10,4 +10,4 @@ authRouter.post('/login', verifyDataLogin, login)
 
 
 
-module.exports = authUser
+module.exports = authRouter
