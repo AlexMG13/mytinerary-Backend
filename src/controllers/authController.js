@@ -1,6 +1,7 @@
 const { verifyPassword } = require("../middlewares/auth")
 const User = require("../models/user")
 
+
 const register = async (req,res) => {
   try{
     const payload=req.body
@@ -25,24 +26,14 @@ const register = async (req,res) => {
 
 const login = async (req,res) => {
 try {
-  const {password, email} = req.body
-  const userFound = await User.findOne({email: email})
-  if(userFound){
-    if(verifyPassword(password, userFound.password)){
-      return res.status(200).json({
-        message: "Login successfull",
-        user: userFound
-      })
-    }else{
-      return res.status(400).json({
-        message: "Wrong password"
-      })
+  res.status(200).json({
+    message: 'Saccesfully loged in',
+    token: req.token,
+    user: {
+      email: req.user.email,
+      _id: req.user._id
     }
-  }else{
-    return res.status(400).json({
-      message: "User not found"
-    })
-  }
+  })
 } catch (error) {
   res.status(400).json({
     message: "The user could not been loged"
@@ -50,6 +41,36 @@ try {
 }
 }
 
+const authenticated = async (res,req) => {
+  try {
+    res.status(200).json({
+      message: 'Saccesfully authenticated',
+      token: req.token,
+      user: {
+        email: req.user.email,
+        _id: req.user._id
+      }
+    })
+  } catch (error) {
+    res.status(400).json({
+      message: "The user could not been loged"
+    })
+  }
+}
+
+const singout = (req,res)=>{
+  try {
+    res.status(200).json({
+      message: 'Sign out successfull',
+      token: req.token
+    })
+  } catch (error) {
+    res.status(500).json({
+      message: error.message
+    })
+  }
+}
+
 module.exports = {
-  register, login
+  register, login, authenticated,singout
 }
