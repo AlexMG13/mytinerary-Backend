@@ -41,7 +41,7 @@ try {
 }
 }
 
-const authenticated = async (res,req) => {
+const authenticated = async (req,res) => {
   try {
     res.status(200).json({
       message: 'Saccesfully authenticated',
@@ -53,7 +53,7 @@ const authenticated = async (res,req) => {
     })
   } catch (error) {
     res.status(400).json({
-      message: "The user could not been loged"
+      message: "The user could not been authenticated"
     })
   }
 }
