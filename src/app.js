@@ -5,7 +5,7 @@ require('./config/db')
 
 const app  = express()
 const PORT = process.env.PORT || 3030
-const whiteList = ['https://countriesnow.space/api/v0.1/countries','http://127.0.0.1:5173']
+const whiteList = ['https://countriesnow.space/api/v0.1/countries','http://127.0.0.1:5173','http://localhost:5173']
 app.use(cors({origin: whiteList}))
 app.use(express.json())
 app.use('/api',router)
