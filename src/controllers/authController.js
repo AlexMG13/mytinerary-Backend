@@ -31,7 +31,8 @@ try {
     token: req.token,
     user: {
       email: req.user.email,
-      _id: req.user._id
+      _id: req.user._id,
+      token: req.token,
     }
   })
 } catch (error) {
@@ -48,7 +49,8 @@ const authenticated = async (req,res) => {
       token: req.token,
       user: {
         email: req.user.email,
-        _id: req.user._id
+        _id: req.user._id,
+        token: req.token,
       }
     })
   } catch (error) {
