@@ -84,7 +84,7 @@ const userSchema = Joi.object({
     "string.empty": "Please enter your name!",
     "any.required": "Please enter your name!",
   }),
-  lastname: Joi.string().min(2).max(20).required().messages({
+  lastname: Joi.string().min(2).max(20).messages({
     "string.lastname": "Please enter your lastname!",
     "string.min": "lastname is too short",
     "string.max": "lastname is too long",

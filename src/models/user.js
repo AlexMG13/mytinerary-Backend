@@ -7,7 +7,6 @@ const schemaUser = new Schema({
   },
   lastname: {
     type: "string",
-    required: true,
   },
   email: {
     type: "string",
