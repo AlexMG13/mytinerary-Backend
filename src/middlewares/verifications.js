@@ -150,7 +150,7 @@ const verifyDataLogin = (req,res,next) => {
   const loginValidated = loginSchema.validate(payload)
   if(loginValidated.error){
     return res.status(400).json({
-      message: userValidated.error.details.map((err)=>err.message)
+      message: loginValidated.error.details.map((err)=>err.message)
     })
   }
   next()
