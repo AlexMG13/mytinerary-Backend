@@ -7,7 +7,7 @@ const schemaUser = new Schema({
   },
   lastname: {
     type: "string",
-    required: true,
+
   },
   email: {
     type: "string",
@@ -19,11 +19,11 @@ const schemaUser = new Schema({
   },
   photo: {
     type: "string",
-    required: true,
+  
   },
   country: {
     type: "string",
-    required: true,
+
   },
 })
 
