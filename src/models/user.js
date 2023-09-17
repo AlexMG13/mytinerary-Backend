@@ -7,10 +7,6 @@ const schemaUser = new Schema({
   },
   lastname: {
     type: "string",
-<<<<<<< HEAD
-=======
-
->>>>>>> sprint-4
   },
   email: {
     type: "string",
