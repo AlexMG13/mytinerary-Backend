@@ -1,4 +1,3 @@
-const { verifyPassword } = require("../middlewares/auth")
 const User = require("../models/user")
 
 

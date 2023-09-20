@@ -84,7 +84,7 @@ const userSchema = Joi.object({
     "string.empty": "Please enter your name!",
     "any.required": "Please enter your name!",
   }),
-  lastname: Joi.string().min(2).max(20).messages({
+  lastname: Joi.string().min(2).max(20).required().messages({
     "string.lastname": "Please enter your lastname!",
     "string.min": "lastname is too short",
     "string.max": "lastname is too long",
@@ -103,13 +103,41 @@ const userSchema = Joi.object({
     "string.empty": "Please enter your password!",
     "any.required": "Please enter your password!",
   }),
-  photo: Joi.string().messages({
+  photo: Joi.string().required().messages({
     "string.photo": "Please enter your photo!",
   }),
-  country: Joi.string().min(2).max(20).messages({
+  country: Joi.string().required().messages({
     "string.country": "Please enter your country!"
   }),
 });
+
+const userGoogleSchema = Joi.object({
+  name: Joi.string().min(2).max(20).required().messages({
+    "string.name": "Please enter your name!",
+    "string.min": "name is too short",
+    "string.max": "name is too long",
+    "string.empty": "Please enter your name!",
+    "any.required": "Please enter your name!",
+  }),
+  email: Joi.string().email().min(4).max(50).required().messages({
+    "string.email": "Please enter your email!",
+    "string.min": "email is too short",
+    "string.max": "email is too long",
+    "string.empty": "Please enter your email!",
+    "any.required": "Please enter your email!",
+  }),
+  password: Joi.string().alphanum().min(8).max(20).required().messages({
+    "string.password": "Please enter your password!",
+    "string.min": "password is too short",
+    "string.max": "password is too long",
+    "string.empty": "Please enter your password!",
+    "any.required": "Please enter your password!",
+  }),
+  photo: Joi.string().required().messages({
+    "any.required": "Please enter your URL photo!",
+  }),
+});
+
 const loginSchema = Joi.object({
   email: Joi.string().email().min(4).max(50).required().messages({
     "string.email": "Please enter your email!",
@@ -148,4 +176,15 @@ const verifyDataLogin = (req,res,next) => {
   next()
 }
 
-module.exports = { verifyCity, verifyId, verifyItinerary, verifyDataUser, verifyDataLogin };
+const verifyDataUserGoogle = (req,res,next) => {
+  const payload = req.body
+  const userValidated = userGoogleSchema.validate(payload)
+  if(userValidated.error){
+    return res.status(400).json({
+      message: userValidated.error.details.map((err)=>err.message)
+    })
+  }
+  next()
+}
+
+module.exports = { verifyCity, verifyId, verifyItinerary, verifyDataUser, verifyDataLogin,verifyDataUserGoogle };
